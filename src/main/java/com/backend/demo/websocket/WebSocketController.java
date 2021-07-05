@@ -8,6 +8,7 @@ import org.springframework.messaging.handler.annotation.SendTo;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+
 public class WebSocketController {
     @MessageMapping("/chat")
     @SendTo("/topic/messages")
