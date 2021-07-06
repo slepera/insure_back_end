@@ -16,6 +16,4 @@ public class WebSocketConfig implements WebSocketConfigurer {
         registry.addHandler(new ChartWebSocketHandler(), "/chart_web_socket").setAllowedOrigins("*");
         registry.addHandler(new DroneWebSocketHandler(), "/drone_web_socket").setAllowedOrigins("*");
     }
-
-
 }

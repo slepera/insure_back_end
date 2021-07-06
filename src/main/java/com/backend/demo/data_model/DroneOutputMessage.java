@@ -4,27 +4,31 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class DroneOutputMessage {
-    private String x;
-    private String y;
+    private String lat;
+    private String lon;
     private String time;
+    private String alt;
 
-    public DroneOutputMessage(String x, String y, String time) {
-        this.x = x;
-        this.y = y;
+    public DroneOutputMessage(String lat, String lon, String alt, String time) {
+        this.lat = lat;
+        this.lon = lon;
+        this.lon = alt;
         this.time = time;
     }
 
     public DroneOutputMessage(JSONObject json_object) {
-        this.x = json_object.getJSONObject("msg").getString("x");
-        this.y = json_object.getJSONObject("msg").getString("y");
+        this.lat = json_object.getJSONObject("msg").getString("lat");
+        this.lon = json_object.getJSONObject("msg").getString("lon");
+        this.alt = json_object.getJSONObject("msg").getString("alt");
         this.time = json_object.getJSONObject("msg").getString("time");
     }
 
     public JSONObject getJSONObject() throws JSONException {
         JSONObject jo = new JSONObject();
         JSONObject jsonObject = new JSONObject();
-        jsonObject.put("x", this.x);
-        jsonObject.put("y", this.y);
+        jsonObject.put("lat", this.lat);
+        jsonObject.put("lon", this.lon);
+        jsonObject.put("alt", this.alt);
         jsonObject.put("time", this.time);
         jo.put("msg", jsonObject);
         return jo;
