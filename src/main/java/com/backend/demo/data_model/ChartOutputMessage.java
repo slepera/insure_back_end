@@ -14,8 +14,8 @@ public class ChartOutputMessage {
     }
 
     public ChartOutputMessage(JSONObject json_object) {
-        this.x = json_object.getJSONObject("msg").getString("x");
-        this.y = json_object.getJSONObject("msg").getString("y");
+        this.x = json_object.getJSONObject("chart_msg").getString("x");
+        this.y = json_object.getJSONObject("chart_msg").getString("y");
     }
 
     public JSONObject getJSONObject() throws JSONException {
@@ -23,7 +23,7 @@ public class ChartOutputMessage {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("x", this.x);
         jsonObject.put("y", this.y);
-        jo.put("msg", jsonObject);
+        jo.put("chart_msg", jsonObject);
         return jo;
     }
 
