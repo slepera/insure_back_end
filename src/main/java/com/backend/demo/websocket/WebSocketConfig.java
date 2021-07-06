@@ -13,12 +13,9 @@ public class WebSocketConfig implements WebSocketConfigurer {
 
     @Override
     public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
-        registry.addHandler(myHandler(), "/web_socket").setAllowedOrigins("*");
+        registry.addHandler(new ChartWebSocketHandler(), "/chart_web_socket").setAllowedOrigins("*");
+        registry.addHandler(new DroneWebSocketHandler(), "/drone_web_socket").setAllowedOrigins("*");
     }
 
-    @Bean
-    public MyWebSocketHandler myHandler() {
-        return new MyWebSocketHandler();
-    }
 
 }

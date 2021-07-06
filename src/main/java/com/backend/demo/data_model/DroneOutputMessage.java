@@ -3,18 +3,18 @@ package com.backend.demo.data_model;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class OutputMessage {
+public class DroneOutputMessage {
     private String x;
     private String y;
     private String time;
 
-    public OutputMessage(String x, String y, String time) {
+    public DroneOutputMessage(String x, String y, String time) {
         this.x = x;
         this.y = y;
         this.time = time;
     }
 
-    public OutputMessage(JSONObject json_object) {
+    public DroneOutputMessage(JSONObject json_object) {
         this.x = json_object.getJSONObject("msg").getString("x");
         this.y = json_object.getJSONObject("msg").getString("y");
         this.time = json_object.getJSONObject("msg").getString("time");
