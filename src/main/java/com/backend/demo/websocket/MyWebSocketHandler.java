@@ -18,7 +18,8 @@ public class MyWebSocketHandler extends TextWebSocketHandler {
     public void handleTextMessage(WebSocketSession session, TextMessage message) {
         System.out.println(message);
         try {
-            session.sendMessage(new TextMessage("ricevuto"));
+            session.sendMessage(new TextMessage(
+                    new OutputMessage("x","y","time").getJSONObject().toString()));
         } catch (IOException e) {
             e.printStackTrace();
         }
