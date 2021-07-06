@@ -18,7 +18,7 @@ public class ChartWebSocketThread extends Thread{
         while (true) {
             try {
                 this.webSocketSession.sendMessage(new TextMessage(
-                        new ChartOutputMessage("242", "203", "chart").getJSONObject().toString()));
+                        new ChartOutputMessage("242", "203").getJSONObject().toString()));
                 Thread.sleep(1000);
             } catch (IOException | InterruptedException e) {
                 e.printStackTrace();

@@ -21,7 +21,7 @@ public class DroneWebSocketHandler extends TextWebSocketHandler {
         System.out.println(message);
         try {
             session.sendMessage(new TextMessage(
-                    new DroneOutputMessage("10","20","drone").getJSONObject().toString()));
+                    new DroneOutputMessage("10","20","drone","dd").getJSONObject().toString()));
         } catch (IOException e) {
             e.printStackTrace();
         }

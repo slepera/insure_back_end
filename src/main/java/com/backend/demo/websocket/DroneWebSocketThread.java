@@ -1,6 +1,7 @@
 package com.backend.demo.websocket;
 
 import com.backend.demo.data_model.ChartOutputMessage;
+import com.backend.demo.data_model.DroneOutputMessage;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 
@@ -18,7 +19,7 @@ public class DroneWebSocketThread extends Thread{
         while (true) {
             try {
                 this.webSocketSession.sendMessage(new TextMessage(
-                        new ChartOutputMessage("242", "203", "drone").getJSONObject().toString()));
+                        new DroneOutputMessage("242", "203", "drone", "drone").getJSONObject().toString()));
                 Thread.sleep(1000);
             } catch (IOException | InterruptedException e) {
                 e.printStackTrace();

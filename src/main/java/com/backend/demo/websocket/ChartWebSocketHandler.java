@@ -21,7 +21,7 @@ public class ChartWebSocketHandler extends TextWebSocketHandler {
         System.out.println(message);
         try {
             session.sendMessage(new TextMessage(
-                    new ChartOutputMessage("10","20","chart").getJSONObject().toString()));
+                    new ChartOutputMessage("10","20").getJSONObject().toString()));
         } catch (IOException e) {
             e.printStackTrace();
         }
