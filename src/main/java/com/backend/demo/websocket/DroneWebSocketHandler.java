@@ -10,20 +10,22 @@ import java.io.IOException;
 
 @Component
 public class DroneWebSocketHandler extends TextWebSocketHandler {
-
+    DroneWebSocketThread droneWebSocketThread;
     @Override
     public void afterConnectionEstablished(WebSocketSession session) throws Exception {
-        new DroneWebSocketThread(session).start();
+        this.droneWebSocketThread = new DroneWebSocketThread(session);
+        this.droneWebSocketThread.start();
     }
 
     @Override
     public void handleTextMessage(WebSocketSession session, TextMessage message) {
-        System.out.println(message);
-        try {
-            session.sendMessage(new TextMessage(
-                    new DroneOutputMessage("10","20","drone","dd").getJSONObject().toString()));
-        } catch (IOException e) {
-            e.printStackTrace();
+        if(message.getPayload().equals("start"))
+        {
+            this.droneWebSocketThread.send(true);
+        }
+        if(message.getPayload().equals("stop"))
+        {
+            this.droneWebSocketThread.send(false);
         }
     }
 
