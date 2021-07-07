@@ -52,7 +52,7 @@ public class DroneWebSocketThread extends Thread{
                 try {
                     this.webSocketSession.sendMessage(new TextMessage(
                             new DroneOutputMessage(String.valueOf(wayPointsArray[count].getLatitude().toDegrees()), String.valueOf(wayPointsArray[count].getLongitude().toDegrees()), String.valueOf(wayPointsArray[count].getElevation().get().doubleValue()), String.valueOf(wayPointsArray[count].getTime().get().toEpochSecond())).getJSONObject().toString()));
-                    Thread.sleep(1000);
+                    Thread.sleep(500);
                 } catch (IOException | InterruptedException e) {
                     e.printStackTrace();
                 }
