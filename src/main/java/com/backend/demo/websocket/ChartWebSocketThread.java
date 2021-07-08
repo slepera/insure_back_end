@@ -1,10 +1,12 @@
 package com.backend.demo.websocket;
 
 import com.backend.demo.data_model.ChartOutputMessage;
+import com.sun.management.OperatingSystemMXBean;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 
 import java.io.IOException;
+import java.lang.management.ManagementFactory;
 
 public class ChartWebSocketThread extends Thread{
     private final WebSocketSession webSocketSession;
@@ -15,11 +17,22 @@ public class ChartWebSocketThread extends Thread{
     }
     @Override
     public void run() {
+        OperatingSystemMXBean bean = (com.sun.management.OperatingSystemMXBean) ManagementFactory
+                .getOperatingSystemMXBean();
+
+        int cpu_usage = 0;
+        long mem_usage = 0;
+
         while (true) {
+            cpu_usage = (int) (bean.getSystemCpuLoad()*100);
+            mem_usage =  bean.getTotalPhysicalMemorySize()-bean.getFreePhysicalMemorySize();
             try {
                 this.webSocketSession.sendMessage(new TextMessage(
-                        new ChartOutputMessage(String.valueOf(System.currentTimeMillis()), String.valueOf(Math.random()*100.0)).getJSONObject().toString()));
-                Thread.sleep(1000);
+                        new ChartOutputMessage("cpu", String.valueOf(System.currentTimeMillis()), String.valueOf(cpu_usage)).getJSONObject().toString()));
+                Thread.sleep(500);
+                this.webSocketSession.sendMessage(new TextMessage(
+                        new ChartOutputMessage("mem", String.valueOf(System.currentTimeMillis()), String.valueOf(mem_usage)).getJSONObject().toString()));
+                Thread.sleep(500);
             } catch (IOException | InterruptedException e) {
                 e.printStackTrace();
             }
