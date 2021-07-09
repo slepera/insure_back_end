@@ -31,7 +31,7 @@ public class ChartWebSocketThread extends Thread{
                         new ChartOutputMessage("cpu", String.valueOf(System.currentTimeMillis()), String.valueOf(cpu_usage)).getJSONObject().toString()));
                 Thread.sleep(500);
                 this.webSocketSession.sendMessage(new TextMessage(
-                        new ChartOutputMessage("mem", String.valueOf(System.currentTimeMillis()), String.valueOf(mem_usage)).getJSONObject().toString()));
+                        new ChartOutputMessage("mem", String.valueOf(System.currentTimeMillis()), String.valueOf(mem_usage).substring(0,2)).getJSONObject().toString()));
                 Thread.sleep(500);
             } catch (IOException | InterruptedException e) {
                 e.printStackTrace();

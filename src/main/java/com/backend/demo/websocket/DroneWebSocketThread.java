@@ -56,7 +56,7 @@ public class DroneWebSocketThread extends Thread{
                 } catch (IOException | InterruptedException e) {
                     e.printStackTrace();
                 }
-                count++;
+                count+=7;
             }
             if (count == size){
                 count = 0;
