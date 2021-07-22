@@ -1,5 +1,6 @@
 package com.backend.demo.websocket;
 
+import com.backend.demo.SatOrbitGenerator;
 import com.backend.demo.data_model.ChartOutputMessage;
 import org.springframework.stereotype.Component;
 import org.springframework.web.socket.CloseStatus;
@@ -15,6 +16,7 @@ public class ChartWebSocketHandler extends TextWebSocketHandler {
     @Override
     public void afterConnectionEstablished(WebSocketSession session) throws Exception {
         new ChartWebSocketThread(session).start();
+
     }
 
     @Override
