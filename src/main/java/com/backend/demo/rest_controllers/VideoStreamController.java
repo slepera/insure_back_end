@@ -18,7 +18,7 @@ public class VideoStreamController {
 
     @Autowired
     VideoStreamingService service;
-    public static final String VideoUploadingDir = "./data/Platform_edit_2";
+    public static final String VideoUploadingDir = "./data/Platform"; //";
 
     @GetMapping(value = "/video", produces = "application/octet-stream")
     public ResponseEntity<ResourceRegion> getVideo(@RequestHeader(value = "Range", required = false) String rangeHeader)
