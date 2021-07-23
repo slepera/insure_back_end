@@ -31,9 +31,9 @@ public class OrbitDataModel {
     }
     public ObjectNode getJSONObject() throws JSONException {
         ObjectMapper mapper = new ObjectMapper();
-        ObjectNode objectNode = mapper.createObjectNode();
         ArrayNode positions = mapper.createArrayNode();
         for (int i = 0; i<this.ttPosArray.size(); i++){
+            ObjectNode objectNode = mapper.createObjectNode();
             objectNode.put("lat", this.ttPosArray.get(i).getLat());
             objectNode.put("lon", this.ttPosArray.get(i).getLon());
             objectNode.put("ele", this.ttPosArray.get(i).getEle());

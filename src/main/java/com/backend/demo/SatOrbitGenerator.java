@@ -6,15 +6,7 @@ import org.json.JSONObject;
 import java.sql.Timestamp;
 
 public class SatOrbitGenerator {
-    long time;
-    double startLat=40;
-    double startLon=10;
-    double stopLat=50;
-    double stopLon=20;
-    double elevation;
-    int pointNumber = 1000;
-    double deltaLon = (stopLon-startLon)/pointNumber;
-    double deltaLat = (stopLat-startLat)/pointNumber;
+
 
 
     /*public void createOrbit(){
@@ -36,10 +28,27 @@ public class SatOrbitGenerator {
 */
 
     public static OrbitDataModel CalculatePositionSamples(String id) {
+        double startLat=30;
+        double startLon=5;
+        double stopLat=60;
+        double stopLon=25;
+        double elevation = 600000.0;
+        long time = System.currentTimeMillis()/1000;
+        int duration = 1000;
+        int samplingPeriod = 1;
+
+        double deltaLon = (stopLon-startLon)/(duration/samplingPeriod);
+        double deltaLat = (stopLat-startLat)/(duration/samplingPeriod);
+        double lat = startLat;
+        double lon = startLon;
+
         OrbitDataModel orbitDataModel = new OrbitDataModel();
         orbitDataModel.setName(id);
-        for (int i=0; i<10; i++){
-            orbitDataModel.add(new TTPos(15.1, 40.1, 1000.0, 100000));
+        for(int i=0; i < duration/samplingPeriod; i++ ){
+            lat += deltaLat;
+            lon += deltaLon;
+            time += samplingPeriod;
+            orbitDataModel.add(new TTPos(lat, lon, elevation, time));
         }
         //System.out.println(orbitDataModel);
         return orbitDataModel;
