@@ -12,10 +12,11 @@ import java.io.IOException;
 
 @Component
 public class ChartWebSocketHandler extends TextWebSocketHandler {
-
+    ChartWebSocketThread chartWebSocketThread;
     @Override
     public void afterConnectionEstablished(WebSocketSession session) throws Exception {
-        new ChartWebSocketThread(session).start();
+        this.chartWebSocketThread = new ChartWebSocketThread(session);
+        this.chartWebSocketThread.start();
 
     }
 
@@ -26,13 +27,16 @@ public class ChartWebSocketHandler extends TextWebSocketHandler {
 
     @Override
     public void handleTextMessage(WebSocketSession session, TextMessage message) {
-        System.out.println(message);
-        try {
-            session.sendMessage(new TextMessage(
-                    new ChartOutputMessage("prova","10","20").getJSONObject().toString()));
-        } catch (IOException e) {
-            e.printStackTrace();
+        if(message.getPayload().equals("start"))
+        {
+            this.chartWebSocketThread.send(true);
         }
+        if(message.getPayload().equals("stop"))
+        {
+            this.chartWebSocketThread.send(false);
+        }
+
     }
+
 
 }
