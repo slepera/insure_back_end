@@ -43,7 +43,7 @@ public class SystemStatusRestController {
                 SystemStatus.fiveGStatus,
                 SystemStatus.satcomStatus,
                 SystemStatus.droneStatus,
-                SystemStatus.droneStatus,
+                SystemStatus.submarineStatus,
                 System.currentTimeMillis()).getJSONObject();
     }
 }
