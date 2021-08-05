@@ -8,6 +8,10 @@ import org.springframework.web.socket.WebSocketSession;
 
 import java.io.IOException;
 import java.lang.management.ManagementFactory;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+import java.text.NumberFormat;
+import java.util.Locale;
 
 public class ChartWebSocketThread extends Thread{
     private final WebSocketSession webSocketSession;
@@ -19,7 +23,7 @@ public class ChartWebSocketThread extends Thread{
     }
     @Override
     public void run() {
-        int ARRAY_SIZE = 50;
+        int ARRAY_SIZE = 10;
 
         double air_temperature[];
         double air_humidity[];
@@ -42,31 +46,33 @@ public class ChartWebSocketThread extends Thread{
         Utility.GenerateArray(air_humidity, 50, 70);
         Utility.GenerateArray(air_wind, 10, 20);
         Utility.GenerateArray(water_temperature, 15, 25);
-        Utility.GenerateArray(water_salinity, 1000, 1070);
+        Utility.GenerateArray(water_salinity, 3.2, 3.7);
         Utility.GenerateArray(water_ph, 5, 9);
-
+        DecimalFormatSymbols otherSymbols = new DecimalFormatSymbols(Locale.GERMANY);
+        otherSymbols.setDecimalSeparator('.');
+        DecimalFormat df = new DecimalFormat("#.##", otherSymbols);
 
         while (true) {
             while(isSending)
             {
                 try {
                     this.webSocketSession.sendMessage(new TextMessage(
-                            new ChartOutputMessage("air_temperature", String.valueOf(System.currentTimeMillis()), String.valueOf(air_temperature[i])).getJSONObject().toString()));
+                            new ChartOutputMessage("air_temperature", String.valueOf(System.currentTimeMillis()), df.format(air_temperature[i])).getJSONObject().toString()));
                     Thread.sleep(500);
                     this.webSocketSession.sendMessage(new TextMessage(
-                            new ChartOutputMessage("air_humidity", String.valueOf(System.currentTimeMillis()), String.valueOf(air_humidity[i])).getJSONObject().toString()));
+                            new ChartOutputMessage("air_humidity", String.valueOf(System.currentTimeMillis()), df.format(air_humidity[i])).getJSONObject().toString()));
                     Thread.sleep(500);
                     this.webSocketSession.sendMessage(new TextMessage(
-                            new ChartOutputMessage("air_wind", String.valueOf(System.currentTimeMillis()), String.valueOf(air_wind[i])).getJSONObject().toString()));
+                            new ChartOutputMessage("air_wind", String.valueOf(System.currentTimeMillis()), df.format(air_wind[i])).getJSONObject().toString()));
                     Thread.sleep(500);
                     this.webSocketSession.sendMessage(new TextMessage(
-                            new ChartOutputMessage("water_temperature", String.valueOf(System.currentTimeMillis()), String.valueOf(water_temperature[i])).getJSONObject().toString()));
+                            new ChartOutputMessage("water_temperature", String.valueOf(System.currentTimeMillis()), df.format(water_temperature[i])).getJSONObject().toString()));
                     Thread.sleep(500);
                     this.webSocketSession.sendMessage(new TextMessage(
-                            new ChartOutputMessage("water_salinity", String.valueOf(System.currentTimeMillis()), String.valueOf(water_salinity[i])).getJSONObject().toString()));
+                            new ChartOutputMessage("water_salinity", String.valueOf(System.currentTimeMillis()), df.format(water_salinity[i])).getJSONObject().toString()));
                     Thread.sleep(500);
                     this.webSocketSession.sendMessage(new TextMessage(
-                            new ChartOutputMessage("water_ph", String.valueOf(System.currentTimeMillis()), String.valueOf(water_ph[i])).getJSONObject().toString()));
+                            new ChartOutputMessage("water_ph", String.valueOf(System.currentTimeMillis()), df.format(water_ph[i])).getJSONObject().toString()));
                     Thread.sleep(500);
                 } catch (IOException | InterruptedException e) {
                     e.printStackTrace();
