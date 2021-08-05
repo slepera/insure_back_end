@@ -1,6 +1,6 @@
 package com.backend.demo.websocket;
 
-import com.backend.demo.data_model.DroneOutputMessage;
+import com.backend.demo.data_model.SubmarineOutputMessage;
 import io.jenetics.jpx.GPX;
 import io.jenetics.jpx.Track;
 import io.jenetics.jpx.TrackSegment;
@@ -50,7 +50,7 @@ public class SubmarineWebSocketThread extends Thread{
             while(count<size && isSending){
                 try {
                     this.webSocketSession.sendMessage(new TextMessage(
-                            new DroneOutputMessage(String.valueOf(wayPointsArray[count].getLatitude().toDegrees()), String.valueOf(wayPointsArray[count].getLongitude().toDegrees()), String.valueOf(wayPointsArray[count].getElevation().get().doubleValue()), String.valueOf(wayPointsArray[count].getTime().get().toEpochSecond())).getJSONObject().toString()));
+                            new SubmarineOutputMessage(String.valueOf(wayPointsArray[count].getLatitude().toDegrees()), String.valueOf(wayPointsArray[count].getLongitude().toDegrees()), String.valueOf(wayPointsArray[count].getElevation().get().doubleValue()), String.valueOf(wayPointsArray[count].getTime().get().toEpochSecond())).getJSONObject().toString()));
                     Thread.sleep(500);
                 } catch (IOException | InterruptedException e) {
                     e.printStackTrace();

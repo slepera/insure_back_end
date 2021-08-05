@@ -8,23 +8,23 @@ import org.springframework.web.socket.handler.TextWebSocketHandler;
 
 @Component
 public class SubmarineWebSocketHandler extends TextWebSocketHandler {
-    DroneWebSocketThread droneWebSocketThread;
+    SubmarineWebSocketThread submarineWebSocketThread;
     @Override
     public void afterConnectionEstablished(WebSocketSession session) throws Exception {
-        this.droneWebSocketThread = new DroneWebSocketThread(session);
-        this.droneWebSocketThread.start();
+        this.submarineWebSocketThread = new SubmarineWebSocketThread(session);
+        this.submarineWebSocketThread.start();
     }
 
     @Override
     public void handleTextMessage(WebSocketSession session, TextMessage message) {
         if(message.getPayload().equals("start"))
         {
-            this.droneWebSocketThread.send(true);
+            this.submarineWebSocketThread.send(true);
             SystemStatus.submarineStatus = "TRANSMITTING";
         }
         if(message.getPayload().equals("stop"))
         {
-            this.droneWebSocketThread.send(false);
+            this.submarineWebSocketThread.send(false);
             SystemStatus.submarineStatus = "NOT_TRANSMITTING";
         }
     }
