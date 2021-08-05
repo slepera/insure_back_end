@@ -1,6 +1,7 @@
 package com.backend.demo.websocket;
 
 import com.backend.demo.data_model.DroneOutputMessage;
+import com.backend.demo.data_model.SystemStatus;
 import org.springframework.stereotype.Component;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
@@ -22,10 +23,12 @@ public class DroneWebSocketHandler extends TextWebSocketHandler {
         if(message.getPayload().equals("start"))
         {
             this.droneWebSocketThread.send(true);
+            SystemStatus.droneStatus = "TRANSMITTING";
         }
         if(message.getPayload().equals("stop"))
         {
             this.droneWebSocketThread.send(false);
+            SystemStatus.droneStatus = "NOT_TRANSMITTING";
         }
     }
 
