@@ -34,7 +34,7 @@ public class DroneWebSocketThread extends Thread{
         int count = 0;
 
         try {
-            trackStream = GPX.reader(GPX.Version.V10).read("./data/6.gpx").tracks();
+            trackStream = GPX.reader(GPX.Version.V10).read("./data/drone_01.gpx").tracks();
 
             segmentStream = trackStream.flatMap(Track::segments);
 
