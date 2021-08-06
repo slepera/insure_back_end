@@ -51,7 +51,7 @@ public class DroneWebSocketThread extends Thread{
             while(count<size && isSending){
                 try {
                     this.webSocketSession.sendMessage(new TextMessage(
-                            new DroneOutputMessage(String.valueOf(wayPointsArray[count].getLatitude().toDegrees()), String.valueOf(wayPointsArray[count].getLongitude().toDegrees()), String.valueOf(wayPointsArray[count].getElevation().get().doubleValue()), String.valueOf(wayPointsArray[count].getTime().get().toEpochSecond())).getJSONObject().toString()));
+                            new DroneOutputMessage(String.valueOf(wayPointsArray[count].getLatitude().toDegrees()-0.550084), String.valueOf(wayPointsArray[count].getLongitude().toDegrees()+0.610890), String.valueOf(wayPointsArray[count].getElevation().get().doubleValue()), String.valueOf(wayPointsArray[count].getTime().get().toEpochSecond())).getJSONObject().toString()));
                     Thread.sleep(500);
                 } catch (IOException | InterruptedException e) {
                     e.printStackTrace();

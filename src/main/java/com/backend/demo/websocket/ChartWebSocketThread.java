@@ -42,12 +42,12 @@ public class ChartWebSocketThread extends Thread{
         int sign = 1;
 
 
-        Utility.GenerateArray(air_temperature, 20, 30);
-        Utility.GenerateArray(air_humidity, 50, 70);
-        Utility.GenerateArray(air_wind, 10, 20);
-        Utility.GenerateArray(water_temperature, 15, 25);
-        Utility.GenerateArray(water_salinity, 3.2, 3.7);
-        Utility.GenerateArray(water_ph, 5, 9);
+        Utility.GenerateArray(air_temperature, 23, 27);
+        Utility.GenerateArray(air_humidity, 69, 75);
+        Utility.GenerateArray(air_wind, 11, 19);
+        Utility.GenerateArray(water_temperature, 20, 22);
+        Utility.GenerateArray(water_salinity, 3.2, 3.6);
+        Utility.GenerateArray(water_ph, 5, 7);
         DecimalFormatSymbols otherSymbols = new DecimalFormatSymbols(Locale.GERMANY);
         otherSymbols.setDecimalSeparator('.');
         DecimalFormat df = new DecimalFormat("#.##", otherSymbols);

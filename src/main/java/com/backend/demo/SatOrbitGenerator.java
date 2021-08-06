@@ -28,10 +28,10 @@ public class SatOrbitGenerator {
 */
 
     public static OrbitDataModel CalculatePositionSamples(String id) {
-        double startLat=30;
+        double startLat=37;
         double startLon=5;
-        double stopLat=60;
-        double stopLon=25;
+        double stopLat=45;
+        double stopLon=19;
         double elevation = 600000.0;
         long time = System.currentTimeMillis()/1000;
         int duration = 1000;
