@@ -3,6 +3,9 @@ import com.backend.demo.data_model.OrbitDataModel;
 import com.backend.demo.data_model.TTPos;
 import org.json.JSONObject;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.sql.Timestamp;
 
 public class SatOrbitGenerator {
@@ -50,27 +53,32 @@ public class SatOrbitGenerator {
             time += samplingPeriod;
             orbitDataModel.add(new TTPos(lat, lon, elevation, time));
         }
-        //System.out.println(orbitDataModel);
         return orbitDataModel;
     }
 
-//        var deltaStep = duration / (intervalCount > 0 ? intervalCount : 1);
-//
-//        var delta = {
-//                lon: (endPoint.lon - point.lon) / intervalCount,
-//                lat: (endPoint.lat - point.lat) / intervalCount
-//    };
-//
-//        for (var since = 0; since <= duration; since += deltaStep) {
-//            this.property.addSample(
-//                    Cesium.JulianDate.addSeconds(startTime, since, new Cesium.JulianDate()),
-//                    Cesium.Cartesian3.fromDegrees(point.lon += delta.lon, point.lat += delta.lat, 100000.0)
-//            );
-//            this.property_2.addSample(
-//                    Cesium.JulianDate.addSeconds(startTime, since, new Cesium.JulianDate()),
-//                    Cesium.Cartesian3.fromDegrees(point.lon, point.lat, 50000.0)
-//            );
-//        }
-//        return;
-//    }
+    public static OrbitDataModel CalculatePositionSamplesFromEphemeris(String id) {
+        long time = System.currentTimeMillis()/1000;
+        OrbitDataModel orbitDataModel = new OrbitDataModel();
+        orbitDataModel.setName(id);
+        try (BufferedReader br = new BufferedReader(new FileReader("./data/cod06495.eph"))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                String after = line.trim().replaceAll(" +", " ");
+                String[] tmp = after.split(" ");
+                if((tmp[0].equals("P"))&&(tmp[1].equals(id)))
+                {
+                    double x = Double.valueOf(tmp[2]);
+                    double y = Double.valueOf(tmp[3]);
+                    double z = Double.valueOf(tmp[4]);
+                    time += 30;
+                    orbitDataModel.add(new TTPos(x, y, z, time));
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return orbitDataModel;
+    }
+
+
 }

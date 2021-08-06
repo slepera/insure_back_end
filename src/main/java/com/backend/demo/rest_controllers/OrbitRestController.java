@@ -18,6 +18,13 @@ import org.springframework.web.socket.TextMessage;
 public class OrbitRestController {
     @GetMapping("/{id}")
     private ObjectNode getOrbit(@PathVariable("id") String id) {
-        return SatOrbitGenerator.CalculatePositionSamples(id).getJSONObject();
+        if(id.equals("0"))
+        {
+            return SatOrbitGenerator.CalculatePositionSamples(id).getJSONObject();
+        }
+        else
+        {
+            return SatOrbitGenerator.CalculatePositionSamplesFromEphemeris(id).getJSONObjectECEF();
+        }
     }
 }

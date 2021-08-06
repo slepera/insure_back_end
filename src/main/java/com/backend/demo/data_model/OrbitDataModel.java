@@ -29,6 +29,24 @@ public class OrbitDataModel {
     public void add (TTPos ttPos){
         this.ttPosArray.add(ttPos);
     }
+
+    public ObjectNode getJSONObjectECEF() throws JSONException {
+        ObjectMapper mapper = new ObjectMapper();
+        ArrayNode positions = mapper.createArrayNode();
+        for (int i = 0; i<this.ttPosArray.size(); i++){
+            ObjectNode objectNode = mapper.createObjectNode();
+            objectNode.put("x", this.ttPosArray.get(i).getLat());
+            objectNode.put("y", this.ttPosArray.get(i).getLon());
+            objectNode.put("z", this.ttPosArray.get(i).getEle());
+            objectNode.put("time", this.ttPosArray.get(i).getTime());
+            positions.add(objectNode);
+        }
+        ObjectNode rootNode = mapper.createObjectNode();
+        rootNode.put("name", this.name);
+        rootNode.put("positions", positions);
+        return rootNode;
+    }
+
     public ObjectNode getJSONObject() throws JSONException {
         ObjectMapper mapper = new ObjectMapper();
         ArrayNode positions = mapper.createArrayNode();
