@@ -70,8 +70,8 @@ public class SatOrbitGenerator {
                     double x = Double.valueOf(tmp[2]);
                     double y = Double.valueOf(tmp[3]);
                     double z = Double.valueOf(tmp[4]);
-                    time += 30;
                     orbitDataModel.add(new TTPos(x, y, z, time));
+                    time += 900;
                 }
             }
         } catch (IOException e) {
