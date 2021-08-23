@@ -60,7 +60,7 @@ public class SatOrbitGenerator {
         long time = System.currentTimeMillis()/1000;
         OrbitDataModel orbitDataModel = new OrbitDataModel();
         orbitDataModel.setName(id);
-        try (BufferedReader br = new BufferedReader(new FileReader("./data/cod06495.eph"))) {
+        try (BufferedReader br = new BufferedReader(new FileReader("./data/prova_sat.csv"))) {
             String line;
             while ((line = br.readLine()) != null) {
                 String after = line.trim().replaceAll(" +", " ");
