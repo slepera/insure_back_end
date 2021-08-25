@@ -37,8 +37,8 @@ public class SatOrbitGenerator {
         double stopLon=19;
         double elevation = 600000.0;
         long time = System.currentTimeMillis()/1000;
-        int duration = 1000;
-        int samplingPeriod = 1;
+        int duration = 15000;
+        int samplingPeriod = 10;
 
         double deltaLon = (stopLon-startLon)/(duration/samplingPeriod);
         double deltaLat = (stopLat-startLat)/(duration/samplingPeriod);
