@@ -24,8 +24,6 @@ public class OrbitRestController {
         }
         else
         {
-            System.out.println("Questa è una stampa di prova");
-
             return SatOrbitGenerator.CalculatePositionSamplesFromEphemeris(id).getJSONObjectECEF();
         }
     }
